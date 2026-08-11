@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cloud Manager - Technology Helper">
+    <title>Cloud Infrastructure Manager - Technology Helper</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background: #f5f7fa; }
+        .cloud-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .resource-card { background: linear-gradient(135deg, #0066cc 0%, #00a8ff 100%); color: white; padding: 20px; border-radius: 10px; }
+        .resource-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; }
+        .resource-value { font-size: 2rem; font-weight: bold; margin-bottom: 5px; }
+        .progress-bar { background: rgba(255,255,255,0.3); border-radius: 10px; height: 8px; margin: 10px 0; overflow: hidden; }
+        .progress-fill { background: white; height: 100%; border-radius: 10px; }
+        .resource-status { font-size: 0.9rem; opacity: 0.9; }
+        .table-style { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .table-style th { background: #f5f7fa; padding: 12px; text-align: left; border-bottom: 2px solid #ddd; }
+        .table-style td { padding: 12px; border-bottom: 1px solid #eee; }
+        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        .status-active { background: #51cf66; color: white; }
+        .status-warning { background: #ffa500; color: white; }
+        .recommendation { background: #fff3cd; padding: 15px; border-radius: 6px; margin: 10px 0; border-left: 4px solid #ffc107; }
+        .savings { color: #51cf66; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo"><h1>🚀 Technology Helper</h1></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="cloud.html" style="color: #00a8ff;">Cloud Manager</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="cloud-container">
+        <div class="section">
+            <h1>☁️ Cloud Infrastructure Manager</h1>
+            <p>Manage and optimize your cloud resources across multiple providers</p>
+        </div>
+
+        <div class="section">
+            <h2>📊 Resource Usage Overview</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-name">Compute (Servers)</div>
+                    <div class="resource-value">8 / 12</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 67%;"></div></div>
+                    <div class="resource-status">67% utilized - 4 available</div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-name">Storage</div>
+                    <div class="resource-value">2.4 TB / 5 TB</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 49%;"></div></div>
+                    <div class="resource-status">49% utilized - Healthy</div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-name">Database Instances</div>
+                    <div class="resource-value">5 / 10</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+                    <div class="resource-status">50% utilized - Good</div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-name">Monthly Bandwidth</div>
+                    <div class="resource-value">8.5 TB / 10 TB</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div>
+                    <div class="resource-status">85% utilized - Monitor closely</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 Cost Analysis</h2>
+            <table class="table-style">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Daily Cost</th>
+                        <th>Monthly Cost</th>
+                        <th>Yearly Cost</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Compute</td>
+                        <td>$145.00</td>
+                        <td>$4,350</td>
+                        <td>$52,200</td>
+                        <td><span class="status-badge status-active">Optimal</span></td>
+                    </tr>
+                    <tr>
+                        <td>Storage</td>
+                        <td>$78.50</td>
+                        <td>$2,355</td>
+                        <td>$28,260</td>
+                        <td><span class="status-badge status-active">Good</span></td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>$189.00</td>
+                        <td>$5,670</td>
+                        <td>$68,040</td>
+                        <td><span class="status-badge status-warning">Review</span></td>
+                    </tr>
+                    <tr>
+                        <td>Bandwidth</td>
+                        <td>$74.50</td>
+                        <td>$2,235</td>
+                        <td>$26,820</td>
+                        <td><span class="status-badge status-active">Good</span></td>
+                    </tr>
+                    <tr style="font-weight: bold; background: #f5f7fa;">
+                        <td>TOTAL</td>
+                        <td>$487.00</td>
+                        <td>$14,610</td>
+                        <td>$175,320</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Optimization Recommendations</h2>
+            <div class="recommendation">
+                <strong>🔴 HIGH PRIORITY: Reduce Unused Servers</strong><br>
+                You have 2 idle servers that can be terminated.<br>
+                <span class="savings">Potential Savings: $2,400/month ($28,800/year)</span>
+                <button class="btn btn-primary" style="margin-top: 10px;">Implement</button>
+            </div>
+            <div class="recommendation">
+                <strong>🟡 MEDIUM: Upgrade to Newer Instances</strong><br>
+                Newer generation instances provide better performance at lower cost.<br>
+                <span class="savings">Potential Savings: $890/month ($10,680/year)</span>
+                <button class="btn btn-primary" style="margin-top: 10px;">Review Options</button>
+            </div>
+            <div class="recommendation">
+                <strong>🟡 MEDIUM: Enable Auto-Scaling</strong><br>
+                Auto-scale your compute based on traffic patterns.<br>
+                <span class="savings">Potential Savings: $1,200/month ($14,400/year)</span>
+                <button class="btn btn-primary" style="margin-top: 10px;">Configure</button>
+            </div>
+            <div class="recommendation">
+                <strong>🟢 LOW: Compress Database Backups</strong><br>
+                Implement compression for backup storage optimization.<br>
+                <span class="savings">Potential Savings: $450/month ($5,400/year)</span>
+                <button class="btn btn-primary" style="margin-top: 10px;">Enable</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 Cost Forecast</h2>
+            <canvas id="costChart" height="80"></canvas>
+        </div>
+
+        <div class="section">
+            <h2>🖥️ Active Resources</h2>
+            <table class="table-style">
+                <thead>
+                    <tr>
+                        <th>Resource Name</th>
+                        <th>Type</th>
+                        <th>Region</th>
+                        <th>Status</th>
+                        <th>Uptime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>prod-server-01</td><td>EC2 Instance</td><td>us-east-1</td><td><span class="status-badge status-active">Running</span></td><td>99.9%</td></tr>
+                    <tr><td>prod-server-02</td><td>EC2 Instance</td><td>us-west-2</td><td><span class="status-badge status-active">Running</span></td><td>99.95%</td></tr>
+                    <tr><td>db-primary</td><td>RDS Database</td><td>us-east-1</td><td><span class="status-badge status-active">Running</span></td><td>99.99%</td></tr>
+                    <tr><td>db-replica</td><td>RDS Database</td><td>eu-west-1</td><td><span class="status-badge status-active">Running</span></td><td>99.99%</td></tr>
+                    <tr><td>storage-bucket</td><td>S3 Storage</td><td>us-east-1</td><td><span class="status-badge status-active">Running</span></td><td>99.99%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        const costCtx = document.getElementById('costChart').getContext('2d');
+        new Chart(costCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Current Cost',
+                        data: [14200, 14500, 14610, 14800, 15000, 15200, 15400, 15300, 15200, 15100, 15000, 14900],
+                        borderColor: '#ff6b6b',
+                        backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Projected Cost (With Optimizations)',
+                        data: [14200, 14500, 13800, 13500, 13200, 12900, 12800, 12700, 12600, 12500, 12400, 12300],
+                        borderColor: '#51cf66',
+                        backgroundColor: 'rgba(81, 207, 102, 0.1)',
+                        tension: 0.4,
+                        borderDash: [5, 5]
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: true } }
+            }
+        });
+
+        console.log('✅ Cloud Infrastructure Manager loaded successfully!');
+    </script>
+</body>
+</html>
