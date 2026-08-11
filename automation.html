@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Automation Workflows - Technology Helper">
+    <title>Automation Workflow Engine - Technology Helper</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { background: #f5f7fa; }
+        .workflow-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .workflow-card { border-left: 4px solid #0066cc; padding: 15px; margin: 10px 0; background: #f9f9f9; border-radius: 6px; }
+        .workflow-header { display: flex; justify-content: space-between; align-items: center; }
+        .workflow-name { font-weight: bold; font-size: 1.1rem; }
+        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        .status-running { background: #51cf66; color: white; }
+        .status-idle { background: #999; color: white; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 10px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: bold; color: #0066cc; }
+        .stat-label { font-size: 0.85rem; color: #666; }
+        .create-btn { background: #0066cc; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+        .create-btn:hover { background: #004a99; }
+        .template-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0; }
+        .template { background: linear-gradient(135deg, #0066cc 0%, #00a8ff 100%); color: white; padding: 15px; border-radius: 6px; cursor: pointer; transition: transform 0.2s; }
+        .template:hover { transform: translateY(-2px); }
+        .exec-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .exec-table th { background: #f5f7fa; padding: 12px; text-align: left; border-bottom: 2px solid #ddd; }
+        .exec-table td { padding: 12px; border-bottom: 1px solid #eee; }
+        .success { color: #51cf66; font-weight: bold; }
+        .warning { color: #ffa500; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo"><h1>🚀 Technology Helper</h1></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="automation.html" style="color: #00a8ff;">Automation</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="workflow-container">
+        <div class="section">
+            <h1>⚙️ Automation Workflow Engine</h1>
+            <p>Create and manage automated workflows to eliminate repetitive tasks</p>
+            <button class="create-btn" onclick="createNewWorkflow()">➕ Create New Workflow</button>
+        </div>
+
+        <div class="section">
+            <h2>📊 Workflow Performance Overview</h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="totalWorkflows">5</div>
+                    <div class="stat-label">Total Workflows</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="activeWorkflows">4</div>
+                    <div class="stat-label">Active Now</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="totalExecutions">6,593</div>
+                    <div class="stat-label">Total Executions</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="avgSuccess">99.6%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 Quick Start Templates</h2>
+            <div class="template-grid">
+                <div class="template" onclick="useTemplate('daily_report')">
+                    <strong>📊 Daily Report</strong><br>
+                    Automatically generate and send daily reports
+                </div>
+                <div class="template" onclick="useTemplate('user_onboarding')">
+                    <strong>👤 User Onboarding</strong><br>
+                    Automate new user setup and welcome emails
+                </div>
+                <div class="template" onclick="useTemplate('data_backup')">
+                    <strong>💾 Data Backup</strong><br>
+                    Schedule automatic data backups
+                </div>
+                <div class="template" onclick="useTemplate('alerts')">
+                    <strong>🔔 Alert Notifications</strong><br>
+                    Send real-time alerts based on triggers
+                </div>
+                <div class="template" onclick="useTemplate('data_sync')">
+                    <strong>🔄 Data Sync</strong><br>
+                    Sync data between systems automatically
+                </div>
+                <div class="template" onclick="useTemplate('cleanup')">
+                    <strong>🧹 Cleanup Tasks</strong><br>
+                    Remove old files and unused data
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔄 Active Workflows</h2>
+            <div id="workflowsList"></div>
+        </div>
+
+        <div class="section">
+            <h2>📈 Execution History (Last 7 Days)</h2>
+            <canvas id="executionChart" height="80"></canvas>
+        </div>
+
+        <div class="section">
+            <h2>⏱️ Recent Executions</h2>
+            <table class="exec-table">
+                <thead>
+                    <tr>
+                        <th>Workflow</th>
+                        <th>Execution Time</th>
+                        <th>Duration</th>
+                        <th>Status</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody id="executionsBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script>
+        // Workflow Data
+        const workflows = [
+            { id: 1, name: 'Daily Report Generation', status: 'running', trigger: 'Every 24h', executions: 847, success: 99.8 },
+            { id: 2, name: 'User Onboarding Flow', status: 'running', trigger: 'On signup', executions: 234, success: 99.2 },
+            { id: 3, name: 'Nightly Data Backup', status: 'running', trigger: 'Every 24h at 2 AM', executions: 92, success: 100 },
+            { id: 4, name: 'Real-time Alert System', status: 'running', trigger: 'On event', executions: 5420, success: 99.5 },
+            { id: 5, name: 'Weekly Report Distribution', status: 'idle', trigger: 'Every Monday 9 AM', executions: 156, success: 98.7 }
+        ];
+
+        // Display workflows
+        function displayWorkflows() {
+            const list = document.getElementById('workflowsList');
+            list.innerHTML = workflows.map(w => `
+                <div class="workflow-card">
+                    <div class="workflow-header">
+                        <div>
+                            <div class="workflow-name">${w.name}</div>
+                            <div style="color: #666; font-size: 0.9rem; margin-top: 5px;">Trigger: ${w.trigger}</div>
+                        </div>
+                        <span class="status-badge ${w.status === 'running' ? 'status-running' : 'status-idle'}">${w.status.toUpperCase()}</span>
+                    </div>
+                    <div class="stats" style="margin-top: 10px;">
+                        <div class="stat"><div class="stat-value">${w.executions}</div><div class="stat-label">Executions</div></div>
+                        <div class="stat"><div class="stat-value success">${w.success}%</div><div class="stat-label">Success Rate</div></div>
+                        <div class="stat" style="grid-column: span 2;"><button class="btn btn-primary" onclick="editWorkflow(${w.id})" style="width: 100%;">Edit</button></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Execution history
+        function displayExecutions() {
+            const body = document.getElementById('executionsBody');
+            const executions = [
+                { workflow: 'Daily Report Generation', time: '2 hours ago', duration: '2m 34s', status: 'Completed', result: '✅ Success' },
+                { workflow: 'User Onboarding Flow', time: '30 minutes ago', duration: '45s', status: 'Completed', result: '✅ Success' },
+                { workflow: 'Real-time Alert System', time: '5 minutes ago', duration: '1s', status: 'Completed', result: '✅ Success' },
+                { workflow: 'Nightly Data Backup', time: 'Yesterday 2 AM', duration: '8m 12s', status: 'Completed', result: '✅ Success' },
+                { workflow: 'Weekly Report Distribution', time: 'Last Monday', duration: '3m 45s', status: 'Completed', result: '✅ Success' }
+            ];
+            
+            body.innerHTML = executions.map(e => `
+                <tr>\n                    <td>${e.workflow}</td>\n                    <td>${e.time}</td>\n                    <td>${e.duration}</td>\n                    <td><span class="status-badge status-running">${e.status}</span></td>\n                    <td class="success">${e.result}</td>\n                </tr>\n            `).join('');
+        }
+
+        // Execution chart
+        const execCtx = document.getElementById('executionChart').getContext('2d');
+        new Chart(execCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Workflow Executions',
+                    data: [987, 1200, 956, 1100, 1340, 234, 89],
+                    backgroundColor: '#0066cc'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // Functions
+        function createNewWorkflow() {
+            alert('✅ Opening workflow builder...\n\nYou can now:\n• Set workflow triggers\n• Add automation actions\n• Configure notifications\n• Test and deploy');
+        }
+
+        function useTemplate(template) {
+            alert(`✅ Using "${template}" template\n\nWorkflow created and ready to configure!`);
+        }
+
+        function editWorkflow(id) {
+            const workflow = workflows.find(w => w.id === id);
+            alert(`✅ Editing: ${workflow.name}\n\nYou can modify:\n• Triggers\n• Actions\n• Conditions\n• Error handling`);
+        }
+
+        // Initialize
+        displayWorkflows();
+        displayExecutions();
+        
+        console.log('✅ Automation Workflow Engine loaded successfully!');
+    </script>
+</body>
+</html>
